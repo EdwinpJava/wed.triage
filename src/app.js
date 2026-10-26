@@ -8,17 +8,12 @@ import { fileURLToPath } from 'node:url';
 
 import { env } from './config/env.js';
 import apiRoutes from './routes/index.js';
-import { createSocketServer } from './sockets/index.js';
 
 const app = express();
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const publicDir = path.resolve(__dirname, '../public');
 
-app.use(
-  helmet({
-    contentSecurityPolicy: false,
-  }),
-);
+app.use(helmet({ contentSecurityPolicy: false }));
 
 const allowedOrigins = env.corsOrigin.split(',').map((origin) => origin.trim());
 app.use(
@@ -75,4 +70,4 @@ app.use((req, res) => {
   res.status(404).send('Página no encontrada.');
 });
 
-export { app, createSocketServer };
+export { app };
