@@ -1,0 +1,137 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model Role {
+  id          String   @id @default(uuid())
+  name        String   @unique
+  description String?
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  userRoles   UserRole[]
+  permissions Permission[]
+}
+
+model Permission {
+  id          String   @id @default(uuid())
+  key         String   @unique
+  description String?
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  roles Role[]
+}
+
+model UserRole {
+  id        String   @id @default(uuid())
+  userId    String
+  roleId    String
+  createdAt DateTime @default(now())
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+  role Role @relation(fields: [roleId], references: [id], onDelete: Cascade)
+
+  @@unique([userId, roleId])
+  @@index([userId])
+  @@index([roleId])
+}
+
+model User {
+  id            String    @id @default(uuid())
+  email         String    @unique
+  name          String
+  passwordHash  String
+  role          String    @default("observador")
+  isActive      Boolean   @default(true)
+  lastLoginAt   DateTime?
+  createdAt     DateTime  @default(now())
+  updatedAt     DateTime  @updatedAt
+
+  userRoles UserRole[]
+  auditLogs AuditLog[]
+}
+
+model Patient {
+  id              String    @id @default(uuid())
+  internalCode    String    @unique
+  firstName       String
+  lastName        String
+  documentType    String?
+  documentNumber  String?
+  birthDate       DateTime?
+  sex             String?
+  phone           String?
+  email           String?
+  address         String?
+  emergencyType   String?
+  arrivalAt       DateTime  @default(now())
+  reason          String?
+  status          String    @default("pending")
+  priority        String    @default("normal")
+  createdAt       DateTime  @default(now())
+  updatedAt       DateTime  @updatedAt
+
+  assessments TriageAssessment[]
+  alerts      Alert[]
+}
+
+model TriageAssessment {
+  id                    String   @id @default(uuid())
+  patientId             String
+  reasonForConsultation String?
+  symptoms             String?
+  heartRate            String?
+  systolicPressure     String?
+  diastolicPressure    String?
+  respiratoryRate      String?
+  temperature          String?
+  oxygenSaturation     String?
+  consciousnessLevel    String?
+  assessmentDate       DateTime @default(now())
+  professionalId       String?
+  observations         String?
+  proposedClassification String?
+  confirmedClassification String?
+  justification        String?
+  createdAt            DateTime @default(now())
+  updatedAt            DateTime @updatedAt
+
+  patient Patient @relation(fields: [patientId], references: [id], onDelete: Cascade)
+}
+
+model Alert {
+  id                  String   @id @default(uuid())
+  patientId           String
+  alertType          String
+  title              String
+  description        String
+  status             String   @default("open")
+  responsibleUserId  String?
+  createdAt          DateTime @default(now())
+  updatedAt          DateTime @updatedAt
+
+  patient Patient @relation(fields: [patientId], references: [id], onDelete: Cascade)
+}
+
+model AuditLog {
+  id              String   @id @default(uuid())
+  userId          String?
+  userName        String?
+  action          String
+  resourceType    String
+  resourceId      String?
+  result          String
+  changedFields   String?
+  reason          String?
+  previousHash    String?
+  currentHash     String?
+  createdAt       DateTime @default(now())
+
+  user User? @relation(fields: [userId], references: [id], onDelete: SetNull)
+}
