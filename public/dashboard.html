@@ -1,0 +1,55 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>TRAMED | Dashboard</title>
+    <link rel="stylesheet" href="/css/styles.css" />
+  </head>
+  <body class="dashboard-body">
+    <aside class="sidebar">
+      <div class="brand small">
+        <span class="brand-mark">✚</span>
+        <span>TRAMED</span>
+      </div>
+
+      <nav class="nav-menu">
+        <a href="#">Dashboard</a>
+        <a href="#">Pacientes</a>
+        <a href="#">Triage</a>
+        <a href="#">Sala de espera</a>
+        <a href="#">Alertas</a>
+      </nav>
+
+      <button id="logoutBtn" class="secondary-btn full">Cerrar sesión</button>
+    </aside>
+
+    <main class="content">
+      <header class="content-header">
+        <h1>Dashboard</h1>
+        <span class="pill success">Sistema en modo demostración</span>
+      </header>
+
+      <section class="stats-grid">
+        <article class="stat-card">
+          <span>Total pacientes</span>
+          <strong id="totalPatients">0</strong>
+        </article>
+        <article class="stat-card">
+          <span>Pendientes</span>
+          <strong id="pendingPatients">0</strong>
+        </article>
+        <article class="stat-card">
+          <span>Urgentes</span>
+          <strong id="urgentPatients">0</strong>
+        </article>
+        <article class="stat-card">
+          <span>Alertas</span>
+          <strong id="alertCount">0</strong>
+        </article>
+      </section>
+    </main>
+
+    <script type="module" src="/js/dashboard.js"></script>
+  </body>
+</html>

@@ -1,0 +1,40 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>TRAMED | Login</title>
+    <link rel="stylesheet" href="/css/styles.css" />
+  </head>
+  <body class="auth-page">
+    <div class="auth-shell">
+      <div class="auth-card">
+        <div class="auth-header">
+          <div class="brand small">
+            <span class="brand-mark">✚</span>
+            <span>TRAMED</span>
+          </div>
+          <h2>Acceso al sistema</h2>
+        </div>
+
+        <form id="loginForm">
+          <label>
+            <span>Email institucional</span>
+            <input type="email" id="email" name="email" value="admin@tramed.local" required />
+          </label>
+
+          <label>
+            <span>Contraseña</span>
+            <input type="password" id="password" name="password" value="Tramed123!" required />
+          </label>
+
+          <button type="submit" class="primary-btn full">Iniciar sesión</button>
+        </form>
+
+        <p id="loginMessage" class="status-message"></p>
+      </div>
+    </div>
+
+    <script type="module" src="/js/auth.js"></script>
+  </body>
+</html>
