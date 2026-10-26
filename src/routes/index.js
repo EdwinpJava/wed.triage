@@ -1,10 +1,59 @@
 import express from 'express';
 
-import authRoutes from './auth.routes.js';
-
 const router = express.Router();
 
-router.use(authRoutes);
+router.post('/login', (req, res) => {
+  const { email, password } = req.body || {};
+
+  if (!email || !password) {
+    return res.status(400).json({ message: 'Email y contraseña son obligatorios.' });
+  }
+
+  if (email !== 'admin@tramed.local' || password !== 'Tramed123!') {
+    return res.status(401).json({ message: 'Credenciales inválidas.' });
+  }
+
+  res.cookie('session', 'tramed-demo-session', {
+    httpOnly: true,
+    sameSite: 'lax',
+    secure: false,
+    maxAge: 60 * 60 * 1000,
+  });
+
+  return res.json({
+    ok: true,
+    message: 'Inicio de sesión exitoso.',
+    user: {
+      id: 'user-001',
+      email,
+      name: 'Administrador demo',
+      role: 'admin',
+    },
+  });
+});
+
+router.post('/logout', (req, res) => {
+  res.clearCookie('session');
+  return res.json({ ok: true, message: 'Sesión cerrada.' });
+});
+
+router.get('/me', (req, res) => {
+  const sessionCookie = req.cookies?.session;
+
+  if (sessionCookie !== 'tramed-demo-session') {
+    return res.status(401).json({ message: 'No autenticado.' });
+  }
+
+  return res.json({
+    ok: true,
+    user: {
+      id: 'user-001',
+      email: 'admin@tramed.local',
+      name: 'Administrador demo',
+      role: 'admin',
+    },
+  });
+});
 
 router.get('/dashboard', (req, res) => {
   res.json({

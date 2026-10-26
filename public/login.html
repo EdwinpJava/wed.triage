@@ -4,37 +4,176 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>TRAMED | Login</title>
-    <link rel="stylesheet" href="/css/styles.css" />
+    <style>
+      :root {
+        --bg: #edf4f7;
+        --panel: #ffffff;
+        --navy: #0d2944;
+        --teal: #1ea5af;
+        --teal-dark: #13839b;
+        --border: #d8e4ea;
+        --danger: #d85353;
+        --success: #2e9f6a;
+      }
+
+      * { box-sizing: border-box; }
+      body {
+        margin: 0;
+        min-height: 100vh;
+        display: grid;
+        place-items: center;
+        background: linear-gradient(135deg, #eef8fa, #edf2f7);
+        font-family: Arial, Helvetica, sans-serif;
+        color: var(--navy);
+      }
+
+      .login-box {
+        width: min(90vw, 440px);
+        background: var(--panel);
+        border: 1px solid var(--border);
+        border-radius: 20px;
+        box-shadow: 0 20px 45px rgba(10, 35, 58, 0.08);
+        padding: 28px;
+      }
+
+      .brand {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 10px;
+        font-size: 2rem;
+        font-weight: 800;
+        margin-bottom: 12px;
+      }
+
+      .brand-mark {
+        width: 28px;
+        height: 28px;
+        border-radius: 50%;
+        background: linear-gradient(135deg, var(--teal), var(--teal-dark));
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        color: white;
+        font-size: 1.1rem;
+      }
+
+      h2 {
+        text-align: center;
+        margin: 12px 0 22px;
+      }
+
+      form {
+        display: grid;
+        gap: 18px;
+      }
+
+      label {
+        display: grid;
+        gap: 8px;
+        font-weight: 600;
+      }
+
+      input {
+        width: 100%;
+        padding: 12px 14px;
+        border-radius: 10px;
+        border: 1px solid var(--border);
+        background: #f7fafc;
+        font: inherit;
+      }
+
+      button {
+        border: none;
+        border-radius: 12px;
+        padding: 12px 18px;
+        font: inherit;
+        font-weight: 700;
+        cursor: pointer;
+        background: linear-gradient(135deg, var(--teal), var(--teal-dark));
+        color: white;
+      }
+
+      .status {
+        min-height: 20px;
+        margin-top: 12px;
+        text-align: center;
+        font-size: 0.95rem;
+      }
+
+      .status.error { color: var(--danger); }
+      .status.success { color: var(--success); }
+
+      .demo {
+        margin-top: 16px;
+        font-size: 0.9rem;
+        color: #587284;
+        text-align: center;
+        line-height: 1.6;
+      }
+    </style>
   </head>
-  <body class="auth-page">
-    <div class="auth-shell">
-      <div class="auth-card">
-        <div class="auth-header">
-          <div class="brand small">
-            <span class="brand-mark">✚</span>
-            <span>TRAMED</span>
-          </div>
-          <h2>Acceso al sistema</h2>
-        </div>
+  <body>
+    <div class="login-box">
+      <div class="brand"><span class="brand-mark">✚</span>TRAMED</div>
+      <h2>Acceso al sistema</h2>
 
-        <form id="loginForm">
-          <label>
-            <span>Email institucional</span>
-            <input type="email" id="email" name="email" value="admin@tramed.local" required />
-          </label>
+      <form id="loginForm">
+        <label>
+          Email
+          <input type="email" id="email" value="admin@tramed.local" required />
+        </label>
 
-          <label>
-            <span>Contraseña</span>
-            <input type="password" id="password" name="password" value="Tramed123!" required />
-          </label>
+        <label>
+          Contraseña
+          <input type="password" id="password" value="Tramed123!" required />
+        </label>
 
-          <button type="submit" class="primary-btn full">Iniciar sesión</button>
-        </form>
+        <button type="submit">Iniciar sesión</button>
+      </form>
 
-        <p id="loginMessage" class="status-message"></p>
+      <p id="status" class="status"></p>
+      <div class="demo">
+        Usuario demo: admin@tramed.local<br />
+        Contraseña demo: Tramed123!
       </div>
     </div>
 
-    <script type="module" src="/js/auth.js"></script>
+    <script>
+      const form = document.getElementById('loginForm');
+      const statusEl = document.getElementById('status');
+
+      form.addEventListener('submit', async (event) => {
+        event.preventDefault();
+
+        const email = document.getElementById('email').value.trim();
+        const password = document.getElementById('password').value.trim();
+
+        statusEl.textContent = 'Validando credenciales...';
+        statusEl.className = 'status';
+
+        try {
+          const response = await fetch('/api/login', {
+            method: 'POST',
+            credentials: 'include',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ email, password })
+          });
+
+          const data = await response.json();
+
+          if (!response.ok) {
+            throw new Error(data.message || 'Credenciales inválidas.');
+          }
+
+          statusEl.textContent = data.message || 'Inicio de sesión exitoso.';
+          statusEl.classList.add('success');
+          window.location.href = '/dashboard';
+        } catch (error) {
+          statusEl.textContent = error.message;
+          statusEl.classList.add('error');
+        }
+      });
+    </script>
   </body>
 </html>

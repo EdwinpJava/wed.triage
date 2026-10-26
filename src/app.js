@@ -13,7 +13,11 @@ const app = express();
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const publicDir = path.resolve(__dirname, '../public');
 
-app.use(helmet({ contentSecurityPolicy: false }));
+app.use(
+  helmet({
+    contentSecurityPolicy: false,
+  }),
+);
 
 const allowedOrigins = env.corsOrigin.split(',').map((origin) => origin.trim());
 app.use(
@@ -50,7 +54,7 @@ app.get('/health', (req, res) => {
 app.use(express.static(publicDir));
 
 app.get('/', (req, res) => {
-  res.sendFile(path.join(publicDir, 'index.html'));
+  res.sendFile(path.join(publicDir, 'login.html'));
 });
 
 app.get('/login', (req, res) => {

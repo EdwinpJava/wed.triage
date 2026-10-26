@@ -27,513 +27,84 @@
                 padding-bottom: env(safe-area-inset-bottom,0px)
             }
 
-            @media(prefers-color-scheme: dark) {
-                :root:not([data-theme="light"]) {
-                    --bg:#061424;
-                    --sf: #0d2238;
-                    --tx: #e8f4fb;
-                    --mu: #8fb0c4;
-                    --ln: #1d3d5a;
-                    --ac: #2fe0cf;
-                    --acx: #03242a;
-                    --ai: #0f3247;
-                    --gr: linear-gradient(135deg,#2fe0cf,#4aa3ff)
-                }
-            }
-
-            :root[data-theme="dark"] {
-                --bg: #061424;
-                --sf: #0d2238;
-                --tx: #e8f4fb;
-                --mu: #8fb0c4;
-                --ln: #1d3d5a;
-                --ac: #2fe0cf;
-                --acx: #03242a;
-                --ai: #0f3247;
-                --gr: linear-gradient(135deg,#2fe0cf,#4aa3ff)
-            }
-
-            html {
-                scroll-padding-top: env(safe-area-inset-top,0px)
-            }
-
-            * {
-                box-sizing: border-box
-            }
-
-            body {
-                margin: 0;
-                background: var(--bg);
-                color: var(--tx);
-                font: 16px/1.5 "Atkinson Hyperlegible",system-ui,sans-serif
-            }
-
-            .app {
-                display: grid;
-                grid-template-columns: 220px 1fr;
-                min-height: 100vh
-            }
-
+            * { box-sizing: border-box; }
+            body { margin:0; background:var(--bg); color:var(--tx); font:16px/1.5 "Atkinson Hyperlegible",system-ui,sans-serif; }
+            .app { display:grid; grid-template-columns:220px 1fr; min-height:100vh; }
             aside {
-                background: var(--sb);
-                box-shadow: 4px 0 24px #0004;
-                color: #cfe0e4;
-                padding: 16px 10px;
-                display: flex;
-                flex-direction: column;
-                gap: 4px
-            }
-
-            .logo {
-                font-weight: 700;
-                font-size: 20px;
-                color: #fff;
-                padding: 4px 10px 16px;
-                letter-spacing: .04em
-            }
-
-            .logo i {
-                display: inline-block;
-                width: 16px;
-                height: 16px;
-                background: linear-gradient(135deg,#2fe0cf,#4aa3ff);
-                border-radius: 50%;
-                margin-right: 8px;
-                box-shadow: 0 0 12px #2fe0cf
-            }
-
-            aside button {
-                font: inherit;
-                text-align: left;
-                background: none;
-                border: 0;
-                color: inherit;
-                padding: 10px 12px;
-                border-radius: 6px;
-                cursor: pointer
-            }
-
-            aside button[aria-current=true] {
-                background: linear-gradient(135deg,#0fb5a6,#1f6fe5);
-                color: #fff;
-                font-weight: 700;
-                box-shadow: 0 2px 10px #0a8f9c66
-            }
-
-            aside button:hover {
-                background: #ffffff1a
-            }
-
-            .sec {
-                font-size: 12px;
-                letter-spacing: .08em;
-                color: #7f98a1;
-                padding: 14px 12px 4px
-            }
-
-            .main {
-                min-width: 0
-            }
-
-            .top {
-                display: flex;
-                gap: 12px;
-                align-items: center;
-                padding: 12px 20px;
-                background: var(--sf);
-                border-bottom: 3px solid transparent;
-                border-image: var(--gr) 1
-            }
-
-            .top h1 {
-                font-size: 18px;
-                margin: 0;
-                flex: 1
-            }
-
-            .bell {
-                position: relative;
-                padding: 4px 10px;
-                border: 1px solid var(--ln);
-                border-radius: 20px
-            }
-
-            .bell b {
-                background: var(--c1);
-                color: #fff;
-                border-radius: 10px;
-                padding: 0 7px;
-                margin-left: 4px;
-                font-size: 13px
-            }
-
-            .v {
-                display: none;
-                padding: 20px
-            }
-
-            .v.on {
-                display: block
-            }
-
-            .box {
-                background: var(--sf);
-                border: 1px solid var(--ln);
-                border-top: 4px solid var(--ac);
-                border-radius: 10px;
-                padding: 16px;
-                box-shadow: 0 4px 18px #0a2f5a1a
-            }
-
-            .g2 {
-                display: grid;
-                grid-template-columns: 1fr 1fr;
-                gap: 16px
-            }
-
-            .chat {
-                display: grid;
-                grid-template-columns: 290px 1fr;
-                gap: 16px
-            }
-
-            .bd {
-                display: grid;
-                grid-template-columns: 1.5fr 1fr;
-                gap: 16px
-            }
-
-            @media(max-width: 860px) {
-                .app {
-                    grid-template-columns:1fr
-                }
-
-                aside {
-                    flex-direction: row;
-                    overflow-x: auto;
-                    padding: 8px
-                }
-
-                .sec,.logo {
-                    display: none
-                }
-
-                aside button {
-                    white-space: nowrap
-                }
-
-                .g2,.chat,.bd {
-                    grid-template-columns: 1fr
-                }
-            }
-
-            h2 {
-                font-size: 15px;
-                letter-spacing: .03em;
-                text-transform: uppercase;
-                margin: 0 0 10px;
-                color: var(--ac)
-            }
-
-            .note {
-                font-size: 13px;
-                color: var(--mu)
-            }
-
-            .over {
-                color: var(--c1);
-                font-weight: 700
-            }
-
-            .warn {
-                color: var(--c2);
-                font-weight: 700
-            }
-
-            .ok {
-                color: var(--c4);
-                font-weight: 700
-            }
-
-            .badge {
-                display: inline-block;
-                min-width: 66px;
-                text-align: center;
-                padding: 1px 8px;
-                border-radius: 4px;
-                font-weight: 700;
-                font-size: 13px;
-                color: #fff
-            }
-
-            .k1 {
-                background: var(--c1)
-            }
-
-            .k2 {
-                background: var(--c2)
-            }
-
-            .k3 {
-                background: var(--c3);
-                color: #221a00
-            }
-
-            .k4 {
-                background: var(--c4)
-            }
-
-            .k5 {
-                background: var(--c5)
-            }
-
-            button.p,button.s {
-                font: inherit;
-                font-size: 14px;
-                padding: 8px 14px;
-                border-radius: 6px;
-                cursor: pointer;
-                border: 1px solid var(--ac)
-            }
-
-            button.p {
-                background: var(--gr);
-                color: var(--acx);
-                font-weight: 700;
-                border-color: transparent;
-                box-shadow: 0 3px 12px #0fb5a655
-            }
-
-            button.p:hover {
-                filter: brightness(1.08)
-            }
-
-            button.s {
-                background: none;
-                color: var(--ac)
-            }
-
-            button.w {
-                width: 100%;
-                padding: 12px;
-                font-size: 16px
-            }
-
-            button:focus-visible,select:focus-visible,input:focus-visible,textarea:focus-visible {
-                outline: 3px solid var(--ac);
-                outline-offset: 2px
-            }
-
-            .pl {
-                padding: 10px;
-                border-radius: 6px;
-                cursor: pointer;
-                border: 1px solid transparent;
-                display: flex;
-                gap: 8px;
-                align-items: center
-            }
-
-            .pl:hover,.pl.on {
-                background: var(--ai);
-                border-color: var(--ln)
-            }
-
-            .pl .g {
-                flex: 1;
-                min-width: 0
-            }
-
-            .dot {
-                width: 10px;
-                height: 10px;
-                border-radius: 50%
-            }
-
-            .msgs {
-                height: 340px;
-                overflow-y: auto;
-                display: flex;
-                flex-direction: column;
-                gap: 10px;
-                padding: 4px
-            }
-
-            .m {
-                max-width: 82%;
-                padding: 10px 14px;
-                border-radius: 10px
-            }
-
-            .m.a1 {
-                background: var(--c1);
-                color: #fff
-            }
-
-            .m.a2 {
-                background: var(--c2);
-                color: #fff
-            }
-
-            .m.me {
-                background: var(--sf);
-                border: 1px solid var(--ln);
-                align-self: flex-end
-            }
-
-            .m.an {
-                background: var(--ac);
-                color: var(--acx)
-            }
-
-            .qs {
-                display: flex;
-                gap: 6px;
-                flex-wrap: wrap;
-                margin-top: 10px
-            }
-
-            label {
-                display: block;
-                font-size: 14px;
-                color: var(--mu);
-                margin-bottom: 10px
-            }
-
-            input,select,textarea {
-                display: block;
-                width: 100%;
-                margin-top: 3px;
-                padding: 8px;
-                font: inherit;
-                color: var(--tx);
-                background: var(--bg);
-                border: 1px solid var(--ln);
-                border-radius: 6px
-            }
-
-            .r3 {
-                display: grid;
-                grid-template-columns: repeat(3,1fr);
-                gap: 10px
-            }
-
-            .lv {
-                border-radius: 8px;
-                padding: 14px;
-                color: #fff;
-                margin-bottom: 12px
-            }
-
-            .lv.l1 {
-                background: var(--c1)
-            }
-
-            .lv.l2 {
-                background: var(--c2)
-            }
-
-            .lv.l3 {
-                background: var(--c3);
-                color: #221a00
-            }
-
-            .lv h3 {
-                margin: 0 0 6px;
-                font-size: 18px
-            }
-
-            .lv .it {
-                display: flex;
-                gap: 8px;
-                align-items: center;
-                padding: 6px 0;
-                border-top: 1px solid #ffffff55
-            }
-
-            .lv button {
-                font: inherit;
-                font-size: 13px;
-                padding: 3px 10px;
-                border-radius: 4px;
-                border: 0;
-                background: #ffffffd9;
-                color: #111;
-                cursor: pointer
-            }
-
-            .bar {
-                height: 8px;
-                border-radius: 4px;
-                background: var(--ln);
-                margin: 4px 0 12px
-            }
-
-            .bar i {
-                display: block;
-                height: 100%;
-                border-radius: 4px
-            }
-
-            table {
-                width: 100%;
-                border-collapse: collapse
-            }
-
-            th,td {
-                text-align: left;
-                padding: 9px 8px;
-                border-bottom: 1px solid var(--ln);
-                font-size: 14px;
-                vertical-align: top
-            }
-
-            th {
-                color: var(--mu);
-                font-weight: 400;
-                font-size: 13px
-            }
-
-            .hash {
-                font-family: ui-monospace,monospace;
-                font-size: 12px;
-                color: var(--mu);
-                word-break: break-all
-            }
-
-            .wrap {
-                overflow-x: auto
-            }
-
-            svg text {
-                fill: var(--mu);
-                font-size: 9px
-            }
-
-            #toast {
-                position: fixed;
-                left: 50%;
-                transform: translateX(-50%);
-                top: calc(10px + env(safe-area-inset-top,0px));
-                background: var(--c1);
-                color: #fff;
-                padding: 10px 18px;
-                border-radius: 8px;
-                font-weight: 700;
-                display: none;
-                z-index: 9;
-                max-width: 90%
-            }
+                background:var(--sb); box-shadow:4px 0 24px #0004; color:#cfe0e4; padding:16px 10px; display:flex; flex-direction:column; gap:4px;
+            }
+            .logo { font-weight:700; font-size:20px; color:#fff; padding:4px 10px 16px; letter-spacing:.04em; }
+            .logo i { display:inline-block; width:16px; height:16px; background:linear-gradient(135deg,#2fe0cf,#4aa3ff); border-radius:50%; margin-right:8px; box-shadow:0 0 12px #2fe0cf; }
+            aside button { font:inherit; text-align:left; background:none; border:0; color:inherit; padding:10px 12px; border-radius:6px; cursor:pointer; }
+            aside button[aria-current=true] { background:linear-gradient(135deg,#0fb5a6,#1f6fe5); color:#fff; font-weight:700; box-shadow:0 2px 10px #0a8f9c66; }
+            aside button:hover { background:#ffffff1a; }
+            .sec { font-size:12px; letter-spacing:.08em; color:#7f98a1; padding:14px 12px 4px; }
+            .main { min-width:0; }
+            .top { display:flex; gap:12px; align-items:center; padding:12px 20px; background:var(--sf); border-bottom:3px solid transparent; border-image:var(--gr) 1; }
+            .top h1 { font-size:18px; margin:0; flex:1; }
+            .bell { position:relative; padding:4px 10px; border:1px solid var(--ln); border-radius:20px; }
+            .bell b { background:var(--c1); color:#fff; border-radius:10px; padding:0 7px; margin-left:4px; font-size:13px; }
+            .v { display:none; padding:20px; }
+            .v.on { display:block; }
+            .box { background:var(--sf); border:1px solid var(--ln); border-top:4px solid var(--ac); border-radius:10px; padding:16px; box-shadow:0 4px 18px #0a2f5a1a; }
+            .g2 { display:grid; grid-template-columns:1fr 1fr; gap:16px; }
+            .chat { display:grid; grid-template-columns:290px 1fr; gap:16px; }
+            .bd { display:grid; grid-template-columns:1.5fr 1fr; gap:16px; }
+            @media(max-width: 860px){ .app{grid-template-columns:1fr;} aside{flex-direction:row; overflow-x:auto; padding:8px;} .sec,.logo{display:none;} aside button{white-space:nowrap;} .g2,.chat,.bd{grid-template-columns:1fr;} }
+            h2 { font-size:15px; letter-spacing:.03em; text-transform:uppercase; margin:0 0 10px; color:var(--ac); }
+            .note { font-size:13px; color:var(--mu); }
+            .over { color:var(--c1); font-weight:700; }
+            .warn { color:var(--c2); font-weight:700; }
+            .ok { color:var(--c4); font-weight:700; }
+            .badge { display:inline-block; min-width:66px; text-align:center; padding:1px 8px; border-radius:4px; font-weight:700; font-size:13px; color:#fff; }
+            .k1 { background:var(--c1); }
+            .k2 { background:var(--c2); }
+            .k3 { background:var(--c3); color:#221a00; }
+            .k4 { background:var(--c4); }
+            .k5 { background:var(--c5); }
+            button.p,button.s { font:inherit; font-size:14px; padding:8px 14px; border-radius:6px; cursor:pointer; border:1px solid var(--ac); }
+            button.p { background:var(--gr); color:var(--acx); font-weight:700; border-color:transparent; box-shadow:0 3px 12px #0fb5a655; }
+            button.p:hover { filter:brightness(1.08); }
+            button.s { background:none; color:var(--ac); }
+            button.w { width:100%; padding:12px; font-size:16px; }
+            button:focus-visible,select:focus-visible,input:focus-visible,textarea:focus-visible { outline:3px solid var(--ac); outline-offset:2px; }
+            .pl { padding:10px; border-radius:6px; cursor:pointer; border:1px solid transparent; display:flex; gap:8px; align-items:center; }
+            .pl:hover,.pl.on { background:var(--ai); border-color:var(--ln); }
+            .pl .g { flex:1; min-width:0; }
+            .dot { width:10px; height:10px; border-radius:50%; }
+            .msgs { height:340px; overflow-y:auto; display:flex; flex-direction:column; gap:10px; padding:4px; }
+            .m { max-width:82%; padding:10px 14px; border-radius:10px; }
+            .m.a1 { background:var(--c1); color:#fff; }
+            .m.a2 { background:var(--c2); color:#fff; }
+            .m.me { background:var(--sf); border:1px solid var(--ln); align-self:flex-end; }
+            .m.an { background:var(--ac); color:var(--acx); }
+            .qs { display:flex; gap:6px; flex-wrap:wrap; margin-top:10px; }
+            label { display:block; font-size:14px; color:var(--mu); margin-bottom:10px; }
+            input,select,textarea { display:block; width:100%; margin-top:3px; padding:8px; font:inherit; color:var(--tx); background:var(--bg); border:1px solid var(--ln); border-radius:6px; }
+            .r3 { display:grid; grid-template-columns:repeat(3,1fr); gap:10px; }
+            .lv { border-radius:8px; padding:14px; color:#fff; margin-bottom:12px; }
+            .lv.l1 { background:var(--c1); }
+            .lv.l2 { background:var(--c2); }
+            .lv.l3 { background:var(--c3); color:#221a00; }
+            .lv h3 { margin:0 0 6px; font-size:18px; }
+            .lv .it { display:flex; gap:8px; align-items:center; padding:6px 0; border-top:1px solid #ffffff55; }
+            .lv button { font:inherit; font-size:13px; padding:3px 10px; border-radius:4px; border:0; background:#ffffffd9; color:#111; cursor:pointer; }
+            .bar { height:8px; border-radius:4px; background:var(--ln); margin:4px 0 12px; }
+            .bar i { display:block; height:100%; border-radius:4px; }
+            table { width:100%; border-collapse:collapse; }
+            th,td { text-align:left; padding:9px 8px; border-bottom:1px solid var(--ln); font-size:14px; vertical-align:top; }
+            th { color:var(--mu); font-weight:400; font-size:13px; }
+            .hash { font-family: ui-monospace,monospace; font-size:12px; color:var(--mu); word-break:break-all; }
+            .wrap { overflow-x:auto; }
+            svg text { fill: var(--mu); font-size:9px; }
+            #toast { position:fixed; left:50%; transform:translateX(-50%); top:calc(10px + env(safe-area-inset-top,0px)); background:var(--c1); color:#fff; padding:10px 18px; border-radius:8px; font-weight:700; display:none; z-index:9; max-width:90%; }
         </style>
     </head>
     <body>
         <div id="toast" role="alert"></div>
         <div class="app">
             <aside>
-                <div class="logo">
-                    <i></i>
-                    TRAMED
-                </div>
+                <div class="logo"><i></i>TRAMED</div>
                 <div class="sec">URGENCIAS</div>
                 <button data-s="chat">1 · Alertas de IA</button>
                 <button data-s="an">2 · Análisis clínico</button>
@@ -546,16 +117,12 @@
                 <div class="top">
                     <h1 id="ttl"></h1>
                     <button class="s" id="sim">Simular ingreso crítico</button>
-                    <span class="bell" title="Urgentes sin confirmar">
-                        🔔<b id="bn">0</b>
-                    </span>
+                    <span class="bell" title="Urgentes sin confirmar">🔔<b id="bn">0</b></span>
                 </div>
                 <section class="v" id="chat">
                     <div class="chat">
                         <div class="box">
-                            <h2>
-                                Pacientes urgentes <span id="cn"></span>
-                            </h2>
+                            <h2>Pacientes urgentes <span id="cn"></span></h2>
                             <div id="ul"></div>
                         </div>
                         <div class="box">
@@ -566,9 +133,7 @@
                     </div>
                 </section>
                 <section class="v" id="an">
-                    <label style="max-width:320px">
-                        Paciente<select id="sp"></select>
-                    </label>
+                    <label style="max-width:320px">Paciente<select id="sp"></select></label>
                     <div id="ab"></div>
                 </section>
                 <section class="v" id="bd">
@@ -612,41 +177,21 @@
                     <div class="g2">
                         <div class="box">
                             <h2>Registro y signos vitales</h2>
-                            <label>
-                                Nombre<input id="f-nom" placeholder="Ej. Luis Pérez">
-                            </label>
+                            <label>Nombre<input id="f-nom" placeholder="Ej. Luis Pérez"></label>
                             <div class="r3">
-                                <label>
-                                    Edad<input id="f-edad" type="number" value="40">
-                                </label>
-                                <label>
-                                    Motivo<input id="f-mot" value="dolor de pecho">
-                                </label>
-                                <label>
-                                    Dolor 0–10<input id="f-dol" type="number" value="8">
-                                </label>
+                                <label>Edad<input id="f-edad" type="number" value="40"></label>
+                                <label>Motivo<input id="f-mot" value="dolor de pecho"></label>
+                                <label>Dolor 0–10<input id="f-dol" type="number" value="8"></label>
                             </div>
                             <div class="r3">
-                                <label>
-                                    FC (lpm)<input id="f-fc" type="number" value="118">
-                                </label>
-                                <label>
-                                    FR (rpm)<input id="f-fr" type="number" value="24">
-                                </label>
-                                <label>
-                                    SatO₂ %<input id="f-sat" type="number" value="93">
-                                </label>
+                                <label>FC (lpm)<input id="f-fc" type="number" value="118"></label>
+                                <label>FR (rpm)<input id="f-fr" type="number" value="24"></label>
+                                <label>SatO₂ %<input id="f-sat" type="number" value="93"></label>
                             </div>
                             <div class="r3">
-                                <label>
-                                    PA sistólica<input id="f-pas" type="number" value="100">
-                                </label>
-                                <label>
-                                    PA diastólica<input id="f-pad" type="number" value="65">
-                                </label>
-                                <label>
-                                    Temp °C<input id="f-tem" type="number" step="0.1" value="36.9">
-                                </label>
+                                <label>PA sistólica<input id="f-pas" type="number" value="100"></label>
+                                <label>PA diastólica<input id="f-pad" type="number" value="65"></label>
+                                <label>Temp °C<input id="f-tem" type="number" step="0.1" value="36.9"></label>
                             </div>
                             <button class="p" id="ev">Evaluar con el motor de reglas</button>
                         </div>
@@ -659,73 +204,30 @@
             </div>
         </div>
         <script>
-            const $ = i => document.getElementById(i)
-              , N = ["", "Triage I", "Triage II", "Triage III", "Triage IV", "Triage V"];
-            const T = {
-                chat: "Alertas de IA en tiempo real",
-                an: "Análisis clínico de IA",
-                bd: "Tablero de sala de espera en vivo",
-                au: "Registro de auditoría médica",
-                nw: "Nuevo triaje"
-            };
+            const $ = i => document.getElementById(i), N = ["", "Triage I", "Triage II", "Triage III", "Triage IV", "Triage V"];
+            const T = { chat: "Alertas de IA en tiempo real", an: "Análisis clínico de IA", bd: "Tablero de sala de espera en vivo", au: "Registro de auditoría médica", nw: "Nuevo triaje" };
+
             function rules(v, m) {
-                const R = []
-                  , a = (c, t) => R.push([c, t]);
-                if (v.sat < 90)
-                    a(1, "SatO₂ " + v.sat + "% (menor a 90)");
-                else if (v.sat < 94)
-                    a(2, "SatO₂ " + v.sat + "% (90–93)");
-                if (v.fr > 30 || v.fr < 8)
-                    a(1, "FR " + v.fr + " rpm fuera de 8–30");
-                else if (v.fr >= 25)
-                    a(2, "FR " + v.fr + " rpm elevada");
-                else if (v.fr >= 21)
-                    a(3, "FR " + v.fr + " rpm ligeramente elevada");
-                if (v.fc > 150 || v.fc < 40)
-                    a(1, "FC " + v.fc + " lpm fuera de 40–150");
-                else if (v.fc >= 130)
-                    a(2, "FC " + v.fc + " lpm (130–150)");
-                else if (v.fc >= 110)
-                    a(3, "FC " + v.fc + " lpm elevada");
-                if (v.pas < 80)
-                    a(1, "PA sistólica " + v.pas + " (inestabilidad)");
-                else if (v.pas < 90)
-                    a(2, "PA sistólica " + v.pas + " baja");
-                if (v.tem >= 39.5)
-                    a(2, "Temperatura " + v.tem + " °C");
-                else if (v.tem >= 38)
-                    a(3, "Fiebre de " + v.tem + " °C");
-                if (v.dol >= 8)
-                    a(2, "Dolor " + v.dol + "/10 (extremo)");
-                else if (v.dol >= 5)
-                    a(3, "Dolor " + v.dol + "/10");
-                else if (v.dol >= 2)
-                    a(4, "Dolor leve " + v.dol + "/10");
-                if (/pecho|tor[aá]c|falta de aire|disnea|desmayo|convuls|sangrado/i.test(m))
-                    a(2, "Motivo de alarma: " + m);
+                const R = [], a = (c, t) => R.push([c, t]);
+                if (v.sat < 90) a(1, "SatO₂ " + v.sat + "% (menor a 90)"); else if (v.sat < 94) a(2, "SatO₂ " + v.sat + "% (90–93)");
+                if (v.fr > 30 || v.fr < 8) a(1, "FR " + v.fr + " rpm fuera de 8–30"); else if (v.fr >= 25) a(2, "FR " + v.fr + " rpm elevada"); else if (v.fr >= 21) a(3, "FR " + v.fr + " rpm ligeramente elevada");
+                if (v.fc > 150 || v.fc < 40) a(1, "FC " + v.fc + " lpm fuera de 40–150"); else if (v.fc >= 130) a(2, "FC " + v.fc + " lpm (130–150)"); else if (v.fc >= 110) a(3, "FC " + v.fc + " lpm elevada");
+                if (v.pas < 80) a(1, "PA sistólica " + v.pas + " (inestabilidad)"); else if (v.pas < 90) a(2, "PA sistólica " + v.pas + " baja");
+                if (v.tem >= 39.5) a(2, "Temperatura " + v.tem + " °C"); else if (v.tem >= 38) a(3, "Fiebre de " + v.tem + " °C");
+                if (v.dol >= 8) a(2, "Dolor " + v.dol + "/10 (extremo)"); else if (v.dol >= 5) a(3, "Dolor " + v.dol + "/10"); else if (v.dol >= 2) a(4, "Dolor leve " + v.dol + "/10");
+                if (/pecho|tor[aá]c|falta de aire|disnea|desmayo|convuls|sangrado/i.test(m)) a(2, "Motivo de alarma: " + m);
                 const cat = R.length ? Math.min(...R.map(r => r[0])) : 5;
-                return {
-                    cat,
-                    R: R.length ? R.filter(r => r[0] <= cat + 1).map(r => r[1]) : ["Signos vitales dentro de rangos normales"]
-                }
+                return { cat, R: R.length ? R.filter(r => r[0] <= cat + 1).map(r => r[1]) : ["Signos vitales dentro de rangos normales"] };
             }
-            let P = []
-              , id = 0
-              , A = []
-              , sel = null
-              , cur = "chat"
-              , CH = {};
-            const gen = (b, am, sd, tr) => Array.from({
-                length: 14
-            }, (_, i) => Math.round(b + am * Math.sin(i * 1.4 + sd) + tr * i / 13));
+
+            let P = [], id = 0, A = [], sel = null, cur = "chat", CH = {};
+            const gen = (b, am, sd, tr) => Array.from({ length: 14 }, (_, i) => Math.round(b + am * Math.sin(i * 1.4 + sd) + tr * i / 13));
+
             function add(nom, edad, mot, min, v) {
                 const r = rules(v, mot);
                 const p = {
                     id: ++id,
-                    nom,
-                    edad,
-                    mot,
-                    v,
+                    nom, edad, mot, v,
                     cat: r.cat,
                     sug: r.cat,
                     why: r.R,
@@ -737,317 +239,197 @@
                     db: gen(v.pad + 3, 3, id + 2, -3)
                 };
                 P.push(p);
-                return p
+                return p;
             }
-            const risk = p => Math.min(9.9, {
-                1: 9,
-                2: 7.3,
-                3: 5,
-                4: 3,
-                5: 1.4
-            }[p.cat] + Math.max(0, 97 - p.v.sat) / 25).toFixed(1);
-            const mins = p => Math.floor((Date.now() - p.arr) / 6e4)
-              , left = p => p.cat == 1 ? 0 : p.cat == 2 ? 30 - mins(p) : null;
+
+            const risk = p => Math.min(9.9, { 1: 9, 2: 7.3, 3: 5, 4: 3, 5: 1.4 }[p.cat] + Math.max(0, 97 - p.v.sat) / 25).toFixed(1);
+            const mins = p => Math.floor((Date.now() - p.arr) / 6e4), left = p => p.cat == 1 ? 0 : p.cat == 2 ? 30 - mins(p) : null;
             const lt = p => {
                 const l = left(p);
-                return p.cat == 1 ? "Inmediata" : l == null ? "Sin límite" : l <= 0 ? "Vencido hace " + (-l) + " min" : "Quedan " + l + " min"
-            }
-            ;
+                return p.cat == 1 ? "Inmediata" : l == null ? "Sin límite" : l <= 0 ? "Vencido hace " + (-l) + " min" : "Quedan " + l + " min";
+            };
             const cl = p => {
                 const l = left(p);
-                return p.cat == 1 || (l != null && l <= 0) ? "over" : l != null && l <= 10 ? "warn" : ""
-            }
-            ;
+                return p.cat == 1 || (l != null && l <= 0) ? "over" : l != null && l <= 10 ? "warn" : "";
+            };
             const bd = c => `<span class="badge k${c}">${N[c]}</span>`;
-            const Q = () => P.filter(p => !p.done).sort( (a, b) => a.cat - b.cat || a.arr - b.arr);
+            const Q = () => P.filter(p => !p.done).sort((a, b) => a.cat - b.cat || a.arr - b.arr);
+
             async function sha(s) {
                 const b = await crypto.subtle.digest("SHA-256", new TextEncoder().encode(s));
-                return [...new Uint8Array(b)].map(x => x.toString(16).padStart(2, "0")).join("")
+                return [...new Uint8Array(b)].map(x => x.toString(16).padStart(2, "0")).join("");
             }
-            async function log(u, act, t=Date.now()) {
+
+            async function log(u, act, t = Date.now()) {
                 const pr = A.length ? A[A.length - 1].h : "0".repeat(64);
-                const r = {
-                    t,
-                    u,
-                    act,
-                    pr
-                };
+                const r = { t, u, act, pr };
                 r.h = await sha(pr + t + u + act);
-                A.push(r)
+                A.push(r);
             }
+
             function toast(t) {
                 const e = $("toast");
                 e.textContent = t;
                 e.style.display = "block";
-                setTimeout( () => e.style.display = "none", 4500)
+                setTimeout(() => e.style.display = "none", 4500);
             }
+
             function go(s) {
                 cur = s;
                 document.querySelectorAll(".v").forEach(x => x.classList.toggle("on", x.id == s));
                 document.querySelectorAll("aside button").forEach(b => b.setAttribute("aria-current", b.dataset.s == s));
                 $("ttl").textContent = T[s];
-                draw()
+                draw();
             }
             document.querySelectorAll("aside button").forEach(b => b.onclick = () => go(b.dataset.s));
+
             function line(ser, cols, lo, hi, unit) {
-                const x = i => 10 + i * (280 / 13)
-                  , y = v => 100 - (v - lo) / (hi - lo) * 90;
-                return `<svg viewBox="0 0 300 115" width="100%" role="img" aria-label="Gráfico ${unit}">${[0, 1, 2].map(i => `<line x1="10" x2="290" y1="${10 + i * 45}" y2="${10 + i * 45}" stroke="var(--ln)"/><text x="0" y="${13 + i * 45}">${Math.round(hi - i * (hi - lo) / 2)}</text>`).join("")}${ser.map( (s, k) => `<polyline fill="none" stroke="${cols[k]}" stroke-width="2" points="${s.map( (v, i) => x(i) + "," + y(Math.max(lo, Math.min(hi, v)))).join(" ")}"/>`).join("")}<text x="10" y="113">-7 h</text><text x="265" y="113">ahora</text></svg>`
+                const x = i => 10 + i * (280 / 13), y = v => 100 - (v - lo) / (hi - lo) * 90;
+                return `<svg viewBox="0 0 300 115" width="100%" role="img" aria-label="Gráfico ${unit}">${[0, 1, 2].map(i => `<line x1="10" x2="290" y1="${10 + i * 45}" y2="${10 + i * 45}" stroke="var(--ln)"/><text x="0" y="${13 + i * 45}">${Math.round(hi - i * (hi - lo) / 2)}</text>`).join("")}${ser.map((s, k) => `<polyline fill="none" stroke="${cols[k]}" stroke-width="2" points="${s.map((v, i) => x(i) + "," + y(Math.max(lo, Math.min(hi, v)))).join(" ")}"/>`).join("")}<text x="10" y="113">-7 h</text><text x="265" y="113">ahora</text></svg>`;
             }
+
             function answer(p, k) {
-                if (k == "why")
-                    return "Motivos: " + p.why.join("; ") + ". Categoría sugerida " + N[p.sug] + " según la Resolución 5596 de 2015.";
-                if (k == "first")
-                    return p.cat == 1 ? "Requiere valoración médica inmediata, sin esperar en la cola. " + p.nom + " lleva " + mins(p) + " min en el servicio." : "Debe valorarse en máximo 30 min. " + lt(p) + ".";
-                return "Riesgo estimado " + risk(p) + "/10. Es una ayuda para decidir; la clasificación final la confirma el médico."
+                if (k == "why") return "Motivos: " + p.why.join("; ") + ". Categoría sugerida " + N[p.sug] + " según la Resolución 5596 de 2015.";
+                if (k == "first") return p.cat == 1 ? "Requiere valoración médica inmediata, sin esperar en la cola. " + p.nom + " lleva " + mins(p) + " min en el servicio." : "Debe valorarse en máximo 30 min. " + lt(p) + ".";
+                return "Riesgo estimado " + risk(p) + "/10. Es una ayuda para decidir; la clasificación final la confirma el médico.";
             }
+
             function drawChat() {
                 const U = Q().filter(p => p.cat <= 2);
-                if (!sel || !U.find(p => p.id == sel))
-                    sel = U[0]?.id;
+                if (!sel || !U.find(p => p.id == sel)) sel = U[0]?.id;
                 $("cn").textContent = "(" + U.length + ")";
                 $("ul").innerHTML = U.map(p => `<div class="pl ${p.id == sel ? "on" : ""}" data-p="${p.id}"><span class="dot" style="background:var(--c${p.cat})"></span><div class="g"><b>${p.nom}</b><br><span class="note">${p.mot}</span></div><span class="${cl(p)}">${mins(p)}m</span></div>`).join("") || '<p class="note">Sin urgencias.</p>';
-                document.querySelectorAll("[data-p]").forEach(e => e.onclick = () => {
-                    sel = +e.dataset.p;
-                    drawChat()
-                }
-                );
+                document.querySelectorAll("[data-p]").forEach(e => e.onclick = () => { sel = +e.dataset.p; drawChat(); });
+
                 const p = P.find(x => x.id == sel);
                 if (!p) {
                     $("ch").textContent = "Asistente de IA";
                     $("ms").innerHTML = "";
                     $("qs").innerHTML = "";
-                    return
+                    return;
                 }
+
                 $("ch").textContent = "Asistente de IA · " + p.nom;
-                CH[p.id] = CH[p.id] || [{
-                    c: "a" + p.cat,
-                    t: `<b>Urgencia: ${p.nom} (${N[p.cat]}).</b> ${p.mot}, ${p.edad} años. ${p.why.join("; ")}.`
-                }];
+                CH[p.id] = CH[p.id] || [{ c: "a" + p.cat, t: `<b>Urgencia: ${p.nom} (${N[p.cat]}).</b> ${p.mot}, ${p.edad} años. ${p.why.join("; ")}.` }];
                 $("ms").innerHTML = CH[p.id].map(m => `<div class="m ${m.c}">${m.t}</div>`).join("");
                 $("ms").scrollTop = 1e5;
-                $("qs").innerHTML = [["why", "¿Por qué es prioritario?"], ["first", "¿Qué hago primero?"], ["risk", "¿Qué riesgo tiene?"]].map( ([k,t]) => `<button class="s" data-k="${k}">${t}</button>`).join("") + '<button class="p" id="goan">Ver análisis clínico</button>';
-                document.querySelectorAll("[data-k]").forEach(b => b.onclick = () => {
-                    CH[p.id].push({
-                        c: "me",
-                        t: b.textContent
-                    }, {
-                        c: "an",
-                        t: answer(p, b.dataset.k)
-                    });
-                    drawChat()
-                }
-                );
-                $("goan").onclick = () => {
-                    $("sp").value = p.id;
-                    go("an")
-                }
+                $("qs").innerHTML = [["why","¿Por qué es prioritario?"],["first","¿Qué hago primero?"],["risk","¿Qué riesgo tiene?"]].map(([k,t]) => `<button class="s" data-k="${k}">${t}</button>`).join("") + '<button class="p" id="goan">Ver análisis clínico</button>';
+                document.querySelectorAll("[data-k]").forEach(b => b.onclick = () => { CH[p.id].push({ c: "me", t: b.textContent }, { c: "an", t: answer(p, b.dataset.k) }); drawChat(); });
+                $("goan").onclick = () => { $("sp").value = p.id; go("an"); };
             }
+
             function drawAn() {
                 const L = Q();
                 const sp = $("sp");
                 sp.innerHTML = L.map(p => `<option value="${p.id}">${p.nom} (${N[p.cat]})</option>`).join("");
-                if (!sp.dataset.k || !L.find(p => p.id == sp.dataset.k)) {}
                 const p = P.find(x => x.id == (sp.dataset.sel || sp.value)) || L[0];
                 if (!p) {
                     $("ab").innerHTML = "<p>No hay pacientes.</p>";
-                    return
+                    return;
                 }
                 sp.value = p.id;
                 sp.dataset.sel = p.id;
-                sp.onchange = () => {
-                    sp.dataset.sel = sp.value;
-                    drawAn()
-                }
-                ;
-                $("ab").innerHTML = `<div class="g2"><div class="box"><h2>${p.nom}, ${p.edad} · ${bd(p.sug)} sugerido</h2>
-<p><b>Frecuencia cardíaca</b> <span class="badge k${p.v.fc >= 130 || p.v.fc < 50 ? 1 : 3}" style="min-width:0">${p.v.fc} lpm</span></p>${line([p.hr], ["var(--c1)"], 50, 160, "frecuencia cardíaca")}
-<p><b>Presión arterial</b> <span class="badge k${p.v.pas < 90 ? 1 : 5}" style="min-width:0">${p.v.pas}/${p.v.pad}</span></p>${line([p.sb, p.db], ["var(--c1)", "var(--c5)"], 40, 160, "presión arterial")}</div>
-<div class="box"><h2>Soporte de decisión de IA</h2>
-${p.conf ? `<p class="ok">Confirmado por el médico como ${N[p.cat]}.</p>` : `<button class="p w" id="cf">Confirmar ${N[p.sug]}</button>
-<label style="margin-top:12px">O modificar la categoría<select id="mc">${[1, 2, 3, 4, 5].map(c => `<option value="${c}" ${c == p.sug ? "selected" : ""}>${N[c]}</option>`).join("")}</select></label>
-<label id="jl" style="display:none">Justificación obligatoria<textarea id="jt" rows="2"></textarea></label><span class="over" id="er"></span>`}
-<h2 style="margin-top:16px">Explicación</h2><ul style="padding-left:18px;margin:0 0 8px">${p.why.map(w => `<li>${w}</li>`).join("")}</ul>
-<p class="note">SatO₂ ${p.v.sat}% · FR ${p.v.fr} rpm · Temp ${p.v.tem} °C · Dolor ${p.v.dol}/10. La IA sugiere, el médico decide.</p></div></div>`;
+                sp.onchange = () => { sp.dataset.sel = sp.value; drawAn(); };
+                $("ab").innerHTML = `<div class="g2"><div class="box"><h2>${p.nom}, ${p.edad} · ${bd(p.sug)} sugerido</h2><p><b>Frecuencia cardíaca</b> <span class="badge k${p.v.fc >= 130 || p.v.fc < 50 ? 1 : 3}" style="min-width:0">${p.v.fc} lpm</span></p>${line([p.hr],["var(--c1)"],50,160,"frecuencia cardíaca")}<p><b>Presión arterial</b> <span class="badge k${p.v.pas < 90 ? 1 : 5}" style="min-width:0">${p.v.pas}/${p.v.pad}</span></p>${line([p.sb, p.db],["var(--c1)","var(--c5)"],40,160,"presión arterial")}</div><div class="box"><h2>Soporte de decisión de IA</h2>${p.conf ? `<p class="ok">Confirmado por el médico como ${N[p.cat]}.</p>` : `<button class="p w" id="cf">Confirmar ${N[p.sug]}</button><label style="margin-top:12px">O modificar la categoría<select id="mc">${[1,2,3,4,5].map(c => `<option value="${c}" ${c == p.sug ? "selected" : ""}>${N[c]}</option>`).join("")}</select></label><label id="jl" style="display:none">Justificación obligatoria<textarea id="jt" rows="2"></textarea></label><span class="over" id="er"></span>`}<h2 style="margin-top:16px">Explicación</h2><ul style="padding-left:18px;margin:0 0 8px">${p.why.map(w => `<li>${w}</li>`).join("")}</ul><p class="note">SatO₂ ${p.v.sat}% · FR ${p.v.fr} rpm · Temp ${p.v.tem} °C · Dolor ${p.v.dol}/10. La IA sugiere, el médico decide.</p></div></div>`;
+
                 if (!p.conf) {
                     $("mc").onchange = () => $("jl").style.display = +$("mc").value != p.sug ? "block" : "none";
                     $("cf").onclick = async () => {
-                        const f = +$("mc").value
-                          , j = ($("jt") || {}).value || "";
-                        if (f != p.sug && j.trim().length < 5) {
-                            $("er").textContent = "Escribe la justificación.";
-                            return
-                        }
-                        p.cat = f;
-                        p.conf = true;
+                        const f = +$("mc").value, j = ($("jt") || {}).value || "";
+                        if (f != p.sug && j.trim().length < 5) { $("er").textContent = "Escribe la justificación."; return; }
+                        p.cat = f; p.conf = true;
                         await log("Dr. de turno", "Confirmó " + N[f] + " a " + p.nom + (f != p.sug ? " (sugerida " + N[p.sug] + "; motivo: " + j + ")" : ""));
-                        draw()
-                    }
+                        draw();
+                    };
                 }
             }
+
             function drawBd() {
                 const L = Q();
-                $("lv").innerHTML = [[1, "Nivel 1 · Emergencia"], [2, "Nivel 2 · Urgente"], [3, "Nivel 3 · Normal"]].map( ([c,t]) => {
+                $("lv").innerHTML = [[1,"Nivel 1 · Emergencia"],[2,"Nivel 2 · Urgente"],[3,"Nivel 3 · Normal"]].map(([c,t]) => {
                     const g = L.filter(p => p.cat == c);
-                    return `<div class="lv l${c}"><h3>${t} (${g.length})</h3>${g.map(p => `<div class="it"><span style="flex:1"><b>${p.nom}</b> · ${p.mot}</span><span>${lt(p)}</span><button data-a="${p.id}">Atender</button></div>`).join("") || "<span>Sin pacientes</span>"}</div>`
-                }
-                ).join("");
+                    return `<div class="lv l${c}"><h3>${t} (${g.length})</h3>${g.map(p => `<div class="it"><span style="flex:1"><b>${p.nom}</b> · ${p.mot}</span><span>${lt(p)}</span><button data-a="${p.id}">Atender</button></div>`).join("") || "<span>Sin pacientes</span>"}</div>`;
+                }).join("");
                 $("lo").textContent = "Niveles 4 y 5 en espera: " + L.filter(p => p.cat >= 4).length + ". Triage II vence a los 30 min.";
-                $("rk").innerHTML = L.slice().sort( (a, b) => risk(b) - risk(a)).map(p => `<div><b>${p.nom}</b> <span style="float:right" class="${cl(p)}">Riesgo ${risk(p)}/10</span><div class="bar"><i style="width:${risk(p) * 10}%;background:var(--c${Math.min(p.cat, 3)})"></i></div></div>`).join("");
+                $("rk").innerHTML = L.slice().sort((a,b) => risk(b) - risk(a)).map(p => `<div><b>${p.nom}</b> <span style="float:right" class="${cl(p)}">Riesgo ${risk(p)}/10</span><div class="bar"><i style="width:${risk(p) * 10}%;background:var(--c${Math.min(p.cat, 3)})"></i></div></div>`).join("");
                 document.querySelectorAll("[data-a]").forEach(b => b.onclick = async () => {
                     const p = P.find(x => x.id == b.dataset.a);
                     p.done = true;
                     await log("Dr. de turno", "Inició atención de " + p.nom + " (" + N[p.cat] + ") tras " + mins(p) + " min");
-                    draw()
-                }
-                )
+                    draw();
+                });
             }
+
             function drawAu() {
-                $("at").innerHTML = A.slice().reverse().map(r => `<tr><td>${new Date(r.t).toLocaleString("es-CO", {
-                    dateStyle: "short",
-                    timeStyle: "medium"
-                })}</td><td>${r.u}</td><td>${r.act}</td><td class="hash">${r.h.slice(0, 24)}…</td></tr>`).join("")
+                $("at").innerHTML = A.slice().reverse().map(r => `<tr><td>${new Date(r.t).toLocaleString("es-CO", { dateStyle: "short", timeStyle: "medium" })}</td><td>${r.u}</td><td>${r.act}</td><td class="hash">${r.h.slice(0, 24)}…</td></tr>`).join("");
             }
+
             $("ver").onclick = async () => {
-                let pr = "0".repeat(64)
-                  , bad = 0;
+                let pr = "0".repeat(64), bad = 0;
                 for (let i = 0; i < A.length; i++) {
-                    if (A[i].pr != pr || await sha(pr + A[i].t + A[i].u + A[i].act) != A[i].h) {
-                        bad = i + 1;
-                        break
-                    }
-                    pr = A[i].h
+                    if (A[i].pr != pr || await sha(pr + A[i].t + A[i].u + A[i].act) != A[i].h) { bad = i + 1; break; }
+                    pr = A[i].h;
                 }
-                $("vr").innerHTML = bad ? `<span class="over">Alteración detectada en el registro ${bad}</span>` : `<span class="ok">Cadena íntegra (${A.length} registros)</span>`
-            }
-            ;
+                $("vr").innerHTML = bad ? `<span class="over">Alteración detectada en el registro ${bad}</span>` : `<span class="ok">Cadena íntegra (${A.length} registros)</span>`;
+            };
+
             $("tam").onclick = () => {
                 if (A.length) {
                     A[0].act += " (editado)";
                     $("vr").textContent = "Registro 1 alterado. Pulsa Verificar cadena.";
-                    drawAu()
+                    drawAu();
                 }
-            }
-            ;
+            };
+
             let pend = null;
             $("ev").onclick = () => {
-                const g = k => $("f-" + k).value
-                  , n = k => +g(k);
-                const v = {
-                    fc: n("fc"),
-                    fr: n("fr"),
-                    pas: n("pas"),
-                    pad: n("pad"),
-                    sat: n("sat"),
-                    tem: n("tem"),
-                    dol: n("dol")
-                };
+                const g = k => $("f-" + k).value, n = k => +g(k);
+                const v = { fc: n("fc"), fr: n("fr"), pas: n("pas"), pad: n("pad"), sat: n("sat"), tem: n("tem"), dol: n("dol") };
                 const r = rules(v, g("mot"));
-                pend = {
-                    nom: g("nom").trim() || "Paciente sin nombre",
-                    edad: n("edad"),
-                    mot: g("mot"),
-                    v
-                };
+                pend = { nom: g("nom").trim() || "Paciente sin nombre", edad: n("edad"), mot: g("mot"), v };
                 $("nr").innerHTML = `<h2>Resultado</h2><p>Categoría sugerida ${bd(r.cat)}</p><ul style="padding-left:18px">${r.R.map(x => `<li>${x}</li>`).join("")}</ul><button class="p" id="rg">Registrar y enviar a análisis</button>`;
                 $("rg").onclick = async () => {
                     const p = add(pend.nom, pend.edad, pend.mot, 0, pend.v);
                     await log("Enf. de triaje", "Registró a " + p.nom + " con sugerencia " + N[p.sug]);
                     $("sp").dataset.sel = p.id;
                     toast("Paciente registrado: " + p.nom);
-                    go("an")
-                }
-            }
-            ;
+                    go("an");
+                };
+            };
+
             $("sim").onclick = async () => {
-                const p = add("Luis Herrera", 66, "desmayo y dolor de pecho", 0, {
-                    fc: 142,
-                    fr: 29,
-                    pas: 76,
-                    pad: 48,
-                    sat: 88,
-                    tem: 36.5,
-                    dol: 9
-                });
+                const p = add("Luis Herrera", 66, "desmayo y dolor de pecho", 0, { fc: 142, fr: 29, pas: 76, pad: 48, sat: 88, tem: 36.5, dol: 9 });
                 await log("Sistema IA", "Alerta: ingreso de " + p.nom + " como " + N[p.sug]);
                 sel = p.id;
                 toast("Alerta IA: " + p.nom + " ingresó como " + N[p.sug] + ". Atender de inmediato.");
-                go("chat")
-            }
-            ;
+                go("chat");
+            };
+
             function draw() {
                 $("bn").textContent = P.filter(p => !p.done && !p.conf && p.cat <= 2).length;
-                ({
-                    chat: drawChat,
-                    an: drawAn,
-                    bd: drawBd,
-                    au: drawAu,
-                    nw: () => {}
-                })[cur]()
+                ({ chat: drawChat, an: drawAn, bd: drawBd, au: drawAu, nw: () => {} })[cur]();
             }
+
             (async () => {
-                const S = [["Ana Ríos", 58, "falta de aire y dolor de pecho", 3, {
-                    fc: 128,
-                    fr: 28,
-                    pas: 85,
-                    pad: 55,
-                    sat: 88,
-                    tem: 37.2,
-                    dol: 9
-                }], ["Pedro Gómez", 63, "dolor de pecho", 26, {
-                    fc: 118,
-                    fr: 24,
-                    pas: 100,
-                    pad: 65,
-                    sat: 93,
-                    tem: 36.9,
-                    dol: 8
-                }], ["Marta Vélez", 71, "mareo y palpitaciones", 14, {
-                    fc: 135,
-                    fr: 20,
-                    pas: 88,
-                    pad: 58,
-                    sat: 95,
-                    tem: 36.8,
-                    dol: 3
-                }], ["Jorge Núñez", 45, "fractura de antebrazo", 40, {
-                    fc: 92,
-                    fr: 18,
-                    pas: 130,
-                    pad: 80,
-                    sat: 98,
-                    tem: 36.7,
-                    dol: 6
-                }], ["Lina Pardo", 9, "tos y fiebre", 12, {
-                    fc: 105,
-                    fr: 22,
-                    pas: 100,
-                    pad: 62,
-                    sat: 97,
-                    tem: 38.4,
-                    dol: 2
-                }], ["Ramiro Ortiz", 29, "consulta por resultados", 55, {
-                    fc: 74,
-                    fr: 15,
-                    pas: 118,
-                    pad: 76,
-                    sat: 99,
-                    tem: 36.5,
-                    dol: 0
-                }]];
+                const S = [
+                    ["Ana Ríos", 58, "falta de aire y dolor de pecho", 3, { fc: 128, fr: 28, pas: 85, pad: 55, sat: 88, tem: 37.2, dol: 9 }],
+                    ["Pedro Gómez", 63, "dolor de pecho", 26, { fc: 118, fr: 24, pas: 100, pad: 65, sat: 93, tem: 36.9, dol: 8 }],
+                    ["Marta Vélez", 71, "mareo y palpitaciones", 14, { fc: 135, fr: 20, pas: 88, pad: 58, sat: 95, tem: 36.8, dol: 3 }],
+                    ["Jorge Núñez", 45, "fractura de antebrazo", 40, { fc: 92, fr: 18, pas: 130, pad: 80, sat: 98, tem: 36.7, dol: 6 }],
+                    ["Lina Pardo", 9, "tos y fiebre", 12, { fc: 105, fr: 22, pas: 100, pad: 62, sat: 97, tem: 38.4, dol: 2 }],
+                    ["Ramiro Ortiz", 29, "consulta por resultados", 55, { fc: 74, fr: 15, pas: 118, pad: 76, sat: 99, tem: 36.5, dol: 0 }]
+                ];
+
                 for (const s of S) {
                     const p = add(...s);
-                    await log("Enf. de triaje", "Registró a " + p.nom + " con sugerencia " + N[p.sug], p.arr + 6e4)
+                    await log("Enf. de triaje", "Registró a " + p.nom + " con sugerencia " + N[p.sug], p.arr + 6e4);
                 }
                 go("chat");
-                setInterval( () => {
-                    if (cur != "an" && cur != "nw" && cur != "chat")
-                        draw();
-                    $("bn").textContent = P.filter(p => !p.done && !p.conf && p.cat <= 2).length
-                }
-                , 5000)
-            }
-            )();
+                setInterval(() => {
+                    if (cur != "an" && cur != "nw" && cur != "chat") draw();
+                    $("bn").textContent = P.filter(p => !p.done && !p.conf && p.cat <= 2).length;
+                }, 5000);
+            })();
         </script>
     </body>
 </html>
