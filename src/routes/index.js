@@ -1,80 +1,76 @@
 import express from 'express';
 
+import { prisma } from '../lib/prisma.js';
+import { requireAuth, requireRole } from '../middleware/auth.js';
+
 const router = express.Router();
 
-router.post('/login', (req, res) => {
-  const { email, password } = req.body || {};
-
-  if (!email || !password) {
-    return res.status(400).json({ message: 'Email y contraseña son obligatorios.' });
+router.use(async (req, res, next) => {
+  try {
+    await prisma.$connect();
+    next();
+  } catch (error) {
+    return res.status(503).json({ message: 'La base de datos no está disponible.' });
   }
+});
 
-  if (email !== 'admin@tramed.local' || password !== 'Tramed123!') {
-    return res.status(401).json({ message: 'Credenciales inválidas.' });
+router.get('/dashboard', requireAuth, requireRole('admin', 'medico', 'enfermeria'), async (req, res) => {
+  try {
+    const [totalPatients, pending, urgent, alerts] = await Promise.all([
+      prisma.patient.count(),
+      prisma.patient.count({ where: { status: 'pending' } }),
+      prisma.patient.count({ where: { priority: 'urgent' } }),
+      prisma.alert.count(),
+    ]);
+
+    return res.json({
+      ok: true,
+      service: 'dashboard',
+      stats: {
+        totalPatients,
+        pending,
+        urgent,
+        alerts,
+      },
+      generatedAt: new Date().toISOString(),
+    });
+  } catch (error) {
+    console.error('Dashboard query error:', error);
+    return res.status(500).json({ message: 'No se pudo cargar el dashboard.' });
   }
-
-  res.cookie('session', 'tramed-demo-session', {
-    httpOnly: true,
-    sameSite: 'lax',
-    secure: false,
-    maxAge: 60 * 60 * 1000,
-  });
-
-  return res.json({
-    ok: true,
-    message: 'Inicio de sesión exitoso.',
-    user: {
-      id: 'user-001',
-      email,
-      name: 'Administrador demo',
-      role: 'admin',
-    },
-  });
 });
 
-router.post('/logout', (req, res) => {
-  res.clearCookie('session');
-  return res.json({ ok: true, message: 'Sesión cerrada.' });
-});
+router.get('/patients', requireAuth, requireRole('admin', 'medico', 'enfermeria'), async (req, res) => {
+  try {
+    const patients = await prisma.patient.findMany({
+      orderBy: { arrivalAt: 'desc' },
+      take: 20,
+      select: {
+        id: true,
+        internalCode: true,
+        firstName: true,
+        lastName: true,
+        emergencyType: true,
+        reason: true,
+        status: true,
+        priority: true,
+        arrivalAt: true,
+      },
+    });
 
-router.get('/me', (req, res) => {
-  const sessionCookie = req.cookies?.session;
-
-  if (sessionCookie !== 'tramed-demo-session') {
-    return res.status(401).json({ message: 'No autenticado.' });
+    return res.json({
+      ok: true,
+      data: patients,
+      pagination: {
+        page: 1,
+        pageSize: 20,
+        total: patients.length,
+      },
+    });
+  } catch (error) {
+    console.error('Patients query error:', error);
+    return res.status(500).json({ message: 'No se pudo consultar la lista de pacientes.' });
   }
-
-  return res.json({
-    ok: true,
-    user: {
-      id: 'user-001',
-      email: 'admin@tramed.local',
-      name: 'Administrador demo',
-      role: 'admin',
-    },
-  });
-});
-
-router.get('/dashboard', (req, res) => {
-  res.json({
-    ok: true,
-    service: 'dashboard',
-    stats: {
-      totalPatients: 24,
-      pending: 8,
-      urgent: 3,
-      alerts: 2,
-    },
-    generatedAt: new Date().toISOString(),
-  });
-});
-
-router.get('/patients', (req, res) => {
-  res.json({
-    ok: true,
-    data: [],
-    pagination: { page: 1, pageSize: 20, total: 0 },
-  });
 });
 
 export default router;

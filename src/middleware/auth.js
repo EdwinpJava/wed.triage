@@ -1,25 +1,32 @@
-export function requireAuth(req, res, next) {
-  const sessionCookie = req.cookies?.session;
+import jwt from 'jsonwebtoken';
 
-  if (sessionCookie !== 'tramed-demo-session') {
+import { env } from '../config/env.js';
+
+export function requireAuth(req, res, next) {
+  const token = req.cookies?.session;
+
+  if (!token) {
     return res.status(401).json({ message: 'Debe iniciar sesión para acceder.' });
   }
 
-  req.user = {
-    id: 'user-001',
-    email: 'admin@tramed.local',
-    name: 'Administrador demo',
-    role: 'admin',
-  };
-
-  return next();
+  try {
+    const decoded = jwt.verify(token, env.sessionSecret);
+    req.user = decoded;
+    return next();
+  } catch (error) {
+    return res.status(401).json({ message: 'Sesión inválida o expirada.' });
+  }
 }
 
-export function requireRole(role) {
+export function requireRole(...allowedRoles) {
   return (req, res, next) => {
     const currentRole = req.user?.role;
 
-    if (currentRole === 'admin' || currentRole === role) {
+    if (!currentRole) {
+      return res.status(401).json({ message: 'No autenticado.' });
+    }
+
+    if (currentRole === 'admin' || allowedRoles.includes(currentRole)) {
       return next();
     }
 
